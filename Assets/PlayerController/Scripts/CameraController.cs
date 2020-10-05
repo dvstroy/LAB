@@ -5,12 +5,7 @@ using UnityEngine.Rendering;
 
 public class CameraController : MonoBehaviour
 {
-   public enum ADSType
-    {
-        HoldToAim,
-        ClickToAim
-    }
-    // Start is called before the first frame update
+   
     [Header("Camera target position")]
     public Transform Target;
 
@@ -20,8 +15,6 @@ public class CameraController : MonoBehaviour
     public float MaxLookUpAngle;
     public float MinLookUpAngle;
     public float FOV;
-    [Header("ADS")]
-    public float ADSspeed;
     Vector2 mouseInput;
     float rotX=0, rotY=0;
     bool aimingDownSights = false;
@@ -44,8 +37,8 @@ public class CameraController : MonoBehaviour
         rotX += mouseInput.x * Xsensitivity;
         rotY += mouseInput.y * Ysensitivity;
         rotY = Mathf.Clamp(rotY, MinLookUpAngle, MaxLookUpAngle);
-        transform.localRotation = Quaternion.Euler(-rotY, rotX, 0f);
-        main.fieldOfView = Mathf.Lerp(main.fieldOfView, FOV, ADSspeed);
+        transform.localRotation = Quaternion.Euler(-rotY, rotX, -0.5f);
+        main.fieldOfView = Mathf.Lerp(main.fieldOfView, FOV, 0);
         Xsensitivity = HorizontalSensitivity;
         Ysensitivity = VerticalSensitivity;
         #endregion
